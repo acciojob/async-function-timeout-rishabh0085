@@ -1,25 +1,20 @@
 //your JS code here. If required.
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("btn");
-  const output = document.getElementById("output");
-
-  btn.addEventListener("click", async () => {
-    const textInput = document.getElementById("text").value;
-    const delayInput = document.getElementById("delay").value;
-
-    if (!textInput || !delayInput) {
-      output.textContent = "Please fill in both text and delay fields.";
-      return;
+    // Function to introduce a delay using a promise
+    function delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    output.textContent = "Waiting...";
+    // Async function to handle the form submission
+    async function handleFormSubmit() {
+      const textInput = document.getElementById('text').value;
+      const delayInput = parseInt(document.getElementById('delay').value);
 
-    await delay(parseInt(delayInput));
+      // Introduce a delay before displaying the message
+      await delay(delayInput);
 
-    output.textContent = textInput;
-  });
+      // Display the user-provided text on the webpage
+      document.getElementById('output').textContent = textInput;
+    }
 
-  function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-});
+    // Event listener for button click
+    document.getElementById('btn').addEventListener('click', handleFormSubmit);
